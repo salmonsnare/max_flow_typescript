@@ -86,6 +86,24 @@ function flowIncidenceListOutput() {
   }
 }
 
+function maxFlowOutput() {
+  let edge: number;
+  let capacity: number;
+  let value: number = 0;
+  console.log("the max flow from source: " + source + ", target: " + target);
+  for (edge = 1; edge <= m; edge++) {
+    capacity = rescap[2 * edge- 1] + rescap[2 * edge];
+    
+    console.log("edge:" + edge + ", source of the edge: " +  head[2 * edge - 1]+ ", sink og the edge: " + head[2 * edge]);
+    console.log("capacity of the edge: " + capacity + ", f(" + edge + ") = " + rescap[2 * edge - 1]);
+
+    if (head[2 * edge - 1] == source) {
+      value = value + rescap[2 * edge - 1];
+    }
+  }
+  console.log("the value of the max flow: " + value);
+}
+
 console.log(flowNetworkInput());
 console.log(head);
 console.log(rescap);
