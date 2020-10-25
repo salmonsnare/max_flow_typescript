@@ -7,6 +7,8 @@ var n: number;
 var source: number;
 var target: number;
 
+const unvisited: number = -1;
+
 var scanf = require('scanf');
 
 function flowNetworkInput() {
@@ -102,6 +104,31 @@ function maxFlowOutput() {
     }
   }
   console.log("the value of the max flow: " + value);
+}
+
+function minCutOuput(path: number[]) {
+  let edge: number;
+  let capacity: number;
+  let capacitySum: number;
+  let vertex: number;
+
+  console.log("min" + source + "-" + target + " cut");
+  console.log("X={");
+  for (vertex = 1; vertex <= n; vertex++) {
+    if (path[vertex] != unvisited) {
+      console.log("vertex: " + vertex);
+    }
+  }
+  console.log("}");
+  capacitySum = 0;
+  for (edge = 1; edge <= m; edge++) {
+    if (path[head[2 * edge - 1]] != unvisited && path[head[2 * edge]] == unvisited) {
+      capacity = rescap[2 * edge - 1] + rescap[2 * edge];
+      console.log("capacity of the edge: " + capacity + ", f(" + edge + ") = " + rescap[2 * edge - 1]);
+      capacitySum = capacitySum + capacity;
+    }
+  }
+  console.log("the capacity of the min" + source + "-" + target + " cut X: " + capacitySum);
 }
 
 console.log(flowNetworkInput());
