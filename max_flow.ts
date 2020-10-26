@@ -169,6 +169,59 @@ function dfs(vertex: number, path: number[]) {
   }
 }
 
+function augmentation(path: number[]) {
+  let arcForward: number;
+  let arcBackward: number;
+  let vertex: number;
+  let w: number;
+  let delta: number;
+  let capacity: number;
+
+  for (vertex = 1; vertex <= n; vertex++) {
+    path[vertex] = unvisited;
+  }
+  path[source] = 0;
+  dfs(source, path);
+  if (t_found) {
+    counter++;
+    arcBackward = path[target];
+    arcForward = arcBackward + 1;
+    if (arcBackward %2 == 0) {
+      arcForward= arcBackward - 1;
+    }
+    delta = rescap[arcForward];
+    vertex = head[arcBackward];
+    while (vertex != source) {
+      arcBackward = path[vertex];
+      vertex = head[arcBackward];
+      arcForward = arcBackward + 1;
+      if (arcBackward % 2 == 0) {
+        arcForward = arcBackward - 1;
+      }
+      if (delta > rescap[arcBackward]) {
+        delta = rescap[arcForward];
+      }
+      console.log("\n");
+      console.log("delta: (P" + counter + ") = " + delta);
+      vertex = target;
+      while (vertex != source) {
+        arcBackward = path[vertex];
+	vertex = head[arcBackward];
+	arcForward = arcBackward + 1;
+	if (arcBackward % 2 == 0) {
+	  console.log("edge: " + arcForward / 2 + ", soruce: " + head[arcBackward] + ", sink: " + head[arcForward]);
+	  // console.log("capacity: " + capacity + ", f(" + arcForward / 2 + "):" + rescap[arcBackward] - delta +  "--> " + rescap[arcBackward]);
+	} else {
+	  console.log("edge: " + arcBackward + ", soruce: " + head[arcForward] + ", sink: " + head[arcBackward]);
+	  // console.log("capacity: " + capacity + ", f(" + arcBackward / 2 + "):" + rescap[arcForward] - delta +  "--> " + rescap[arcForward]);
+	}
+
+      }
+    }
+  }
+
+}
+
 console.log(flowNetworkInput());
 console.log(head);
 console.log(rescap);
