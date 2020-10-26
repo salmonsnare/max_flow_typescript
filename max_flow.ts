@@ -210,10 +210,10 @@ function augmentation(path: number[]) {
 	arcForward = arcBackward + 1;
 	if (arcBackward % 2 == 0) {
 	  console.log("edge: " + arcForward / 2 + ", soruce: " + head[arcBackward] + ", sink: " + head[arcForward]);
-	  // console.log("capacity: " + capacity + ", f(" + arcForward / 2 + "):" + rescap[arcBackward] - delta +  "--> " + rescap[arcBackward]);
+	  console.log("capacity: " + capacity + ", f(" + arcForward / 2 + "):" + (rescap[arcBackward] - delta) +  "--> " + rescap[arcBackward]);
 	} else {
 	  console.log("edge: " + arcBackward + ", soruce: " + head[arcForward] + ", sink: " + head[arcBackward]);
-	  // console.log("capacity: " + capacity + ", f(" + arcBackward / 2 + "):" + rescap[arcForward] - delta +  "--> " + rescap[arcForward]);
+	  console.log("capacity: " + capacity + ", f(" + arcBackward / 2 + "):" + (rescap[arcForward] - delta) +  "--> " + rescap[arcForward]);
 	}
 
       }
