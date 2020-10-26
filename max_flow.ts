@@ -6,7 +6,12 @@ var m: number;
 var n: number;
 var source: number;
 var target: number;
+var t_found: boolean;
+var counter: number;
 
+const vertexMaxSize = 100;
+const edgeMaxSize = 400;
+const edge2MaxSize = 800;
 const unvisited: number = -1;
 
 var scanf = require('scanf');
@@ -129,6 +134,39 @@ function minCutOuput(path: number[]) {
     }
   }
   console.log("the capacity of the min" + source + "-" + target + " cut X: " + capacitySum);
+}
+
+function dfs(vertex: number, path: number[]) {
+  let arcForward: number;
+  let arcBackward: number;
+  let w: number;
+
+  arcForward = edgeFirst[vertex];
+
+  while (arcForward != 0 && rescap[arcForward] == 0) {
+    arcForward = edgeNext[arcForward]
+  }
+
+  while (t_found == false && arcForward != 0) {
+    w = head[arcForward];
+    if (path[w] == unvisited) {
+      arcForward = arcForward + 1;
+      if (arcForward %2 == 0) {
+        arcBackward = arcForward - 1;
+      }
+      if (w != target) {
+        dfs(w, path)
+      } else {
+	t_found = true;
+      }
+    }
+    if (t_found == false) {
+      arcForward = edgeNext[arcForward]
+      while (arcForward != 0 && rescap[arcForward] == 0) {
+        arcForward = edgeNext[arcForward]
+      }
+    }
+  }
 }
 
 console.log(flowNetworkInput());
